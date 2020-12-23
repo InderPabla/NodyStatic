@@ -39,7 +39,7 @@ public class NodyData
     public static float NodyMassScalar = 1.1f;
 
     public static string CreatureListFolder = "CreatureList";
-    public static string GameStateUUID = "5fe49549";
+    public static string GameStateUUID;
     public static string SessionUUID;
     public static string LoadSessionUUD;
     public static float MaxCameraOrthoSize = 130;
@@ -54,17 +54,17 @@ public class NodyData
     public static float MaxSize = 1.25f;
     public static float EyeSize = 0.2f;
     public static float FoodSize = 1.0f; //0.6
-    public static float ShellSize = 0.2f; //0.2
+    public static float ShellSize = 0.4f; //0.2
     public static float SpikeSize = 0.2f; //0.2
    
  
-    public static int InitialSpanwCount = 25;
+    public static int InitialSpanwCount = 20;
     public static int MinFoodCount = 50;
     public static int MaxFoodCount = 50;
-    public static int SpawnBoundary = 500/2;
+    public static int SpawnBoundary = 300;
     public static int MinSpawnBoundary = 5;
     public static int MaxSpawnBoundary = SpawnBoundary - MinSpawnBoundary;
-    public static int[] BlockBoundaries = new int[] {25,50,25};
+    public static int[] BlockBoundaries = new int[] {50};
     public static int BoundarySeperators = 2;
     public static bool IsBoundaryWallTypeSim = true;
 
@@ -102,7 +102,7 @@ public class NodyData
     public static float EyeLineZIndex = -0.2f;
     public static float EyePosZIndex = -0.1f;
     public static float ShellPosZIndex = 0f;
-    public static float SpikePosZIndex = 0f;
+    public static float SpikePosZIndex = 0.1f; //Push spike behind the Nody
 
     public static int MinModFireNet = 1;
     public static int MaxModFireNet = 1;
@@ -113,17 +113,17 @@ public class NodyData
     public static float EnergyLoss_WallTouch = 20f;
     public static float EnergyLoss_NetworkFired = 0.001f;
     public static float EnergyLoss_EyeUsedAtMaxViewRange = 0.001f;
-    public static float EnergyLoss_PerShell = 0.001f/5f; 
+    public static float EnergyLoss_PerShell = 0.001f; 
     public static float EnergyLoss_PerSpike = 0.002f; 
     public static float EnergyLoss_PerNode = 0.002f;
     public static float EnergyLoss_SpeedDeltaTime = 0.002f;
-    public static float EnergyGain_PreyFoodEaten = 30f;
-    public static float EnergyGain_PredFoodEaten = 25f;
+    public static float EnergyGain_PreyFoodEaten = 20f;
+    public static float EnergyGain_PredFoodEaten = 20f;
     public static float EnergyLoss_Brith = 100f; 
     public static float EnergyGain_OtherNode = 2f;
     public static float EnergyGain_OtherNodeFractionGain = 0.95f;
     public static float EnergyLoss_Connection = 0.001f/10f;
-    public static float EnergryLoss_ShellDamage = 0.2f;
+    public static float EnergryLoss_ShellDamage = 1f;
     public static float EnergryLoss_FoodEatenSpikeCount = 3f;
     public static float EnergyLoss_AttackedSpecies = EnergryLoss_FoodEatenSpikeCount;
 

@@ -685,6 +685,10 @@ public class NodyStatic : MonoBehaviour
                 EyeIndex++;
             }
 
+            /**
+             * Generating Shell Game Objects to be displayed
+             * TODO: Updating to use sprite renderer
+             */
             for (int j = 0; j < NodeMeta.ShellList.Count; j++)
             {
                 NodyShellMeta ShellMeta = NodeMeta.ShellList[j];
@@ -695,13 +699,12 @@ public class NodyStatic : MonoBehaviour
                 ShellNodePos.z = NodyData.ShellPosZIndex;
                 ShellNode.transform.position = ShellNodePos;
 
-                MeshRenderer ShellRen = ShellNode.AddComponent<MeshRenderer>();
-                ShellRen.material = NodyData.MainBodyMaterial;
-                ShellRen.material.SetColor("_BaseColor", _Meta.ShellColor);
-                ShellNode.AddComponent<MeshFilter>().sharedMesh = MeshGenerator.CircleMesh(2, ShellMeta.BaseSize);
+                SpriteRenderer sprite = ShellNode.AddComponent<SpriteRenderer>();
+                sprite.sprite = Resources.Load<Sprite>("Shell");
                 ShellNode.transform.parent = transform;
                 ShellNode.name = "Shell-" + i + "-" + j;
-                ShellArr[ShellIndex].Mat = ShellRen.material;
+                ShellNode.transform.localScale = new Vector3(NodyData.ShellSize*0.6f, NodyData.ShellSize * 0.6f, 1f);
+                ShellArr[ShellIndex].Mat = sprite.material;
 
                 ShellIndex++;
             }
@@ -716,13 +719,15 @@ public class NodyStatic : MonoBehaviour
                 SpikeNodePos.z = NodyData.SpikePosZIndex;
                 SpikeNode.transform.position = SpikeNodePos;
 
-                MeshRenderer SpikeRen = SpikeNode.AddComponent<MeshRenderer>();
-                SpikeRen.material = NodyData.MainBodyMaterial;
-                SpikeRen.material.SetColor("_BaseColor", _Meta.SpikeColor);
-                SpikeNode.AddComponent<MeshFilter>().sharedMesh = MeshGenerator.CircleMesh(2, SpikeMeta.BaseSize);
+                SpriteRenderer sprite = SpikeNode.AddComponent<SpriteRenderer>();
+                sprite.sprite = Resources.Load<Sprite>("Spike");
                 SpikeNode.transform.parent = transform;
                 SpikeNode.name = "Spike-" + i + "-" + j;
-                SpikeArr[SpikeIndex].Mat = SpikeRen.material;
+                SpikeNode.transform.localScale = new Vector3(NodyData.SpikeSize * .75f*2f, NodyData.SpikeSize * .75f*2f, 1f);
+                SpikeArr[SpikeIndex].Mat = sprite.material;
+
+                SpikeNode.transform.eulerAngles = new Vector3(0,0, SpikeMeta.InitialUnitVectorDegree+transform.eulerAngles.z);
+                //SpikeNode.transform.position += SpikeNode.transform.right * 0.3f;
 
                 SpikeIndex++;
             }
@@ -763,13 +768,13 @@ public class NodyStatic : MonoBehaviour
         {
             if(ShellArr[i].ShellMeta.IsDead)
             {
-                ShellArr[i].Mat.SetColor("_BaseColor", Color.gray);
+                ShellArr[i].Mat.color = Color.black;
             }
             else 
             {
                 if (ShellArr[i].HasHitOccured)
                 {
-                    ShellArr[i].Mat.SetColor("_BaseColor", Color.gray);
+                    ShellArr[i].Mat.color = Color.gray;
                 }
                 else
                 {
@@ -778,11 +783,11 @@ public class NodyStatic : MonoBehaviour
                     {
                         float H, S, V;
                         Color.RGBToHSV(_Meta.ShellColor, out H, out S, out V);
-                        ShellArr[i].Mat.SetColor("_BaseColor", Color.HSVToRGB(H, S, Ratio));
+                        ShellArr[i].Mat.color = Color.HSVToRGB(H, Ratio, V);
                     }
                     else
-                    {
-                        ShellArr[i].Mat.SetColor("_BaseColor", _Meta.ShellColor);
+                    {      
+                        ShellArr[i].Mat.color = Color.white;
                     }
                 }
             }
@@ -796,11 +801,13 @@ public class NodyStatic : MonoBehaviour
         {
             if (SpikeArr[i].HasHitOccured)
             {
-                SpikeArr[i].Mat.SetColor("_BaseColor", Color.gray);
+                //SpikeArr[i].Mat.SetColor("_BaseColor", Color.gray);
+                SpikeArr[i].Mat.color = Color.gray;
             }
             else
             {
-                SpikeArr[i].Mat.SetColor("_BaseColor", _Meta.SpikeColor);
+                //SpikeArr[i].Mat.SetColor("_BaseColor", _Meta.SpikeColor);
+                SpikeArr[i].Mat.color = Color.white;
             }
         }
     }

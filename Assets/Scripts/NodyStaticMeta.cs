@@ -595,6 +595,7 @@ public class NodyStaticMeta
 
 
         InitVariables();
+        InitEnergy();
     }
 
 
